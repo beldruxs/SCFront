@@ -1,0 +1,22 @@
+<div class="min-h-screen bg-gray-900 text-white flex flex-col p-4">
+  <div class="header flex justify-between items-center w-full mb-8">
+    <span class="text-xl font-bold text-white">{{ username }}</span>
+    <div>
+      <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 mr-2" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="dashboard flex flex-col items-center">
+    <h1 class="text-4xl font-bold mb-4 text-blue-400">Dashboard</h1>
+
+    <div class="phishing-pages bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-4xl">
+      <h2 class="text-2xl font-bold mb-4 text-blue-400">Available Phishing Pages</h2>
+      <div *ngFor="let page of phishingPages" class="card bg-gray-700 p-4 rounded-lg mb-4">
+        <img [src]="page.logo" alt="{{ page.nombre }} logo" class="w-16 h-16 mb-4">
+        <h3 class="text-xl font-bold mb-2">{{ page.nombre }}</h3>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 mr-2" (click)="viewDetails(page.nombre)">Ver más datos</button>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" (click)="viewPage(page.nombre)">Ver página</button>
+      </div>
+    </div>
+  </div>
+</div>
