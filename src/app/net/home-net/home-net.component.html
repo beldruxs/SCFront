@@ -1,0 +1,14 @@
+<div class="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900 text-white flex flex-col items-center">
+  <div class="flex flex-col items-center justify-center text-center px-6 py-12">
+    <h1 class="text-5xl font-extrabold text-blue-400 mb-6">Bienvenido, {{ username }}!</h1>
+    <p class="text-xl text-gray-300 max-w-3xl mb-8">
+      Aquí están tus estadísticas de phishing.
+    </p>
+    <div class="w-full max-w-lg">
+      <canvas id="phishingChart"></canvas>
+    </div>
+    <button (click)="navigateToEditProfile()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded transition mt-8">
+      Editar Perfil y Preferencias
+    </button>
+  </div>
+</div>

@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { AuthResponse } from '../../models';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-admin',
   imports: [
     FormsModule
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login-admin.component.html',
+  styleUrls: ['./login-admin.component.css']
 })
-export class LoginAdminComponent {
+export class LoginAdminComponent implements OnInit {
   username: string = '';
   password: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
+  ngOnInit() {
+    console.log("hola")
+  }
+
   login() {
-    this.apiService.login(this.username, this.password)
+    this.apiService.loginAdmin(this.username, this.password)
       .subscribe({
         next: (response: AuthResponse) => {
           sessionStorage.setItem('authToken', response.accessToken);

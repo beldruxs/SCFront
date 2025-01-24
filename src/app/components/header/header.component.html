@@ -11,6 +11,10 @@
       <a href="/features" class="text-white hover:text-blue-300 transition">Características</a>
       <a href="/about" class="text-white hover:text-blue-300 transition">Sobre Nosotros</a>
       <a href="/contact" class="text-white hover:text-blue-300 transition">Contacto</a>
+      <button *ngIf="isLoggedIn(); else loginButton" (click)="logout()" class="text-white hover:text-blue-300 transition">Cerrar Sesión</button>
+      <ng-template #loginButton>
+        <a href="/login" class="text-white hover:text-blue-300 transition">Iniciar Sesión</a>
+      </ng-template>
     </nav>
   </div>
   <div class="md:hidden" id="mobile-menu" style="display: none;">
@@ -19,6 +23,10 @@
       <a href="/features" class="text-white hover:text-blue-300 transition">Características</a>
       <a href="/about" class="text-white hover:text-blue-300 transition">Sobre Nosotros</a>
       <a href="/contact" class="text-white hover:text-blue-300 transition">Contacto</a>
+      <button *ngIf="isLoggedIn(); else loginButton" (click)="logout()" class="text-white hover:text-blue-300 transition">Cerrar Sesión</button>
+      <ng-template #loginButton>
+        <a href="/login" class="text-white hover:text-blue-300 transition">Iniciar Sesión</a>
+      </ng-template>
     </nav>
   </div>
 </header>

@@ -11,9 +11,26 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getToken(): string | null {
+    return sessionStorage.getItem('authToken');
+  }
+
+  hasRole(role: string): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.roles && payload.roles.includes(role);
+  }
+
   login(username: string, password: string): Observable<AuthResponse> {
     const loginDto = { username, password };
     return this.http.post<AuthResponse>(`${API_URL}/api/auth/login`, loginDto);
+  }
+
+  loginAdmin(username: string, password: string): Observable<AuthResponse> {
+    const loginDto = { username, password };
+    return this.http.post<AuthResponse>(`${API_URL}/api/auth/loginAdmin`, loginDto);
   }
 
   incrementFakePageVisits(fakePageName: string): Observable<string> {

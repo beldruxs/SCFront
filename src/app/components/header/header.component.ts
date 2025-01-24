@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  imports: [
+    NgIf
+  ],
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const menuButton = document.getElementById('menu-button');
@@ -20,4 +26,13 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('authToken');
+  }
+
+  logout(): void {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
 }

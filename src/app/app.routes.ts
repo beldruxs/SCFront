@@ -10,15 +10,18 @@ import {AboutComponent} from './home/about/about.component';
 import {LoginAdminComponent} from './admin-dashboard/loginAdmin/login-admin.component';
 import { LoginComponent } from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
+import {HomeNetComponent} from './net/home-net/home-net.component';
+import { HomeNetGuard } from './home-net.guard';
+import { EditProfileComponent } from './net/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'admin',
     children: [
+      { path: 'login', component: LoginAdminComponent},
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-      { path: 'login', component: LoginAdminComponent },
-      { path: 'detail/:id', component: DetailComponent }
+      { path: 'detail/:id', component: DetailComponent, canActivate: [AuthGuard]}
     ]
   },
   {
@@ -28,6 +31,13 @@ export const routes: Routes = [
   { path: 'features', component: FeaturesComponent },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  {
+    path: 'net',
+    children: [
+      { path: '', component: HomeNetComponent, canActivate: [HomeNetGuard] },
+      { path: 'edit-profile', component: EditProfileComponent, canActivate: [HomeNetGuard] }
+    ]
+  },
 
 ];
