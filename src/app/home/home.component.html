@@ -1,12 +1,41 @@
-<div class="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-  <h1 class="text-4xl font-bold mb-4 text-blue-400">Proyecto de Phishing Ético</h1>
-  <p class="text-lg mb-2 text-gray-300 max-w-2xl text-center">
-    Este es un proyecto de phishing ético con distintas páginas. El objetivo de este proyecto es educar y concienciar sobre las técnicas de phishing y cómo protegerse contra ellas.
-  </p>
-  <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" (click)="navigateToLogin()">
-    Ir a Inicio de Sesión
-  </button>
-  <div class="mt-8">
-    <img src="assets/phishing.png" alt="Phishing" class="w-full max-w-md rounded shadow-lg">
+<div class="min-h-screen bg-gradient-to-b from-gray-800 to-gray-900 text-white flex flex-col items-center">
+  <div class="flex flex-col items-center justify-center text-center px-6 py-12">
+    <h1 class="text-5xl font-extrabold text-blue-400 mb-6">Safe Click</h1>
+    <p class="text-xl text-gray-300 max-w-3xl mb-8">
+      Safe Click es un proyecto de <strong class="text-blue-300">phishing ético</strong> diseñado para educar y concienciar a los usuarios
+      sobre los riesgos y las técnicas de phishing. Aprende a protegerte mientras participas en una experiencia interactiva y segura.
+    </p>
+    <div class="flex gap-4">
+      <button (click)="navigateToRegister()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded transition">
+        Registrarse
+      </button>
+      <button (click)="navigateToLogin()" class="bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500 font-bold py-3 px-6 rounded transition">
+        Iniciar Sesión
+      </button>
+    </div>
+    <div class="mt-12">
+      <img
+        src="assets/phishing.png"
+        alt="Phishing Illustration"
+        class="w-full max-w-lg rounded-lg shadow-2xl"
+      />
+    </div>
+  </div>
+  <div class="bg-gray-700 py-8 w-full text-center">
+    <h2 class="text-2xl font-bold text-blue-300 mb-4">¿Por qué Safe Click?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-300">
+      <div>
+        <h3 class="text-lg font-bold text-blue-400">Educación Interactiva</h3>
+        <p>Recibe correos de phishing simulados y aprende a identificarlos en un entorno seguro.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-blue-400">100% Seguro</h3>
+        <p>Todos los intentos son simulados y están diseñados para educar, no para comprometer.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-blue-400">Resultados Medibles</h3>
+        <p>Evalúa tu progreso y mejora tu capacidad para detectar intentos de phishing.</p>
+      </div>
+    </div>
   </div>
 </div>

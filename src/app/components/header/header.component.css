@@ -1,0 +1,8 @@
+header {
+  z-index: 50;
+}
+
+nav ul li a {
+  font-size: 1rem;
+  font-weight: 500;
+}

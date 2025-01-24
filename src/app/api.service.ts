@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_URL } from '../config';
-import { AuthResponse } from './models';
+import { AuthResponse, RegisterRequest } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +41,9 @@ export class ApiService {
   getUsersByNombre(nombre: string): Observable<any[]> {
     const params = new HttpParams().set('fakePageName', nombre);
     return this.http.get<any[]>(`${API_URL}/api/fakeuser/getByPageName`, { params });
+  }
+
+  register(registerRequest: RegisterRequest): Observable<string> {
+    return this.http.post(`${API_URL}/api/auth/register`, registerRequest, { responseType: 'text' });
   }
 }

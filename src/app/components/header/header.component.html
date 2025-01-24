@@ -1,0 +1,24 @@
+<header class="w-full bg-gray-800 py-4 px-6 shadow-md">
+  <div class="flex justify-between items-center max-w-7xl mx-auto">
+    <a href="/" class="text-2xl font-extrabold text-blue-400">Safe Click</a>
+    <button class="text-white md:hidden" id="menu-button">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+    <nav class="hidden md:flex gap-6" id="menu">
+      <a href="#" class="text-white hover:text-blue-300 transition">Inicio</a>
+      <a href="/features" class="text-white hover:text-blue-300 transition">Características</a>
+      <a href="/about" class="text-white hover:text-blue-300 transition">Sobre Nosotros</a>
+      <a href="/contact" class="text-white hover:text-blue-300 transition">Contacto</a>
+    </nav>
+  </div>
+  <div class="md:hidden" id="mobile-menu" style="display: none;">
+    <nav class="flex flex-col gap-4 mt-4">
+      <a href="#" class="text-white hover:text-blue-300 transition">Inicio</a>
+      <a href="/features" class="text-white hover:text-blue-300 transition">Características</a>
+      <a href="/about" class="text-white hover:text-blue-300 transition">Sobre Nosotros</a>
+      <a href="/contact" class="text-white hover:text-blue-300 transition">Contacto</a>
+    </nav>
+  </div>
+</header>

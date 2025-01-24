@@ -12,7 +12,7 @@ import { AuthResponse } from '../../models';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginAdminComponent {
   username: string = '';
   password: string = '';
 
