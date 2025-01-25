@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import {ApiService} from '../../api.service';
 
 @Component({
   selector: 'app-home-net',
@@ -9,12 +10,14 @@ import { Chart } from 'chart.js';
 })
 export class HomeNetComponent implements OnInit {
   username: string | null = '';
+  userProfile: any = {};
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.username = sessionStorage.getItem('username');
     this.loadChart();
+    this.getUserProfile();
   }
 
   loadChart(): void {
@@ -47,6 +50,19 @@ export class HomeNetComponent implements OnInit {
         }
       }
     });
+  }
+
+  getUserProfile(): void {
+    if (this.username) {
+      this.apiService.getUserProfile(this.username).subscribe({
+        next: (response: any) => {
+          this.userProfile = response;
+        },
+        error: (error) => {
+          console.error('Failed to fetch user profile', error);
+        }
+      });
+    }
   }
 
   navigateToEditProfile(): void {

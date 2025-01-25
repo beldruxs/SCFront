@@ -12,7 +12,7 @@ export class HomeNetGuard implements CanActivate {
 
   canActivate(): boolean | Observable<boolean> {
     const token = this.authService.getToken();
-    if (token && this.authService.hasRole('USER')) {
+    if (token && (this.authService.hasRole('USER') || this.authService.hasRole('ADMIN'))) {
       return true;
     } else {
       this.router.navigate(['/login']);

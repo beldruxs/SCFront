@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   imports: [
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrls: ['./header.component.css']
 })
@@ -28,6 +29,10 @@ export class HeaderComponent implements OnInit {
   }
   isLoggedIn(): boolean {
     return !!sessionStorage.getItem('authToken');
+  }
+
+  getUsername(): string | null {
+    return sessionStorage.getItem('username');
   }
 
   logout(): void {

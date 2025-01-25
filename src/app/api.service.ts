@@ -63,4 +63,35 @@ export class ApiService {
   register(registerRequest: RegisterRequest): Observable<string> {
     return this.http.post(`${API_URL}/api/auth/register`, registerRequest, { responseType: 'text' });
   }
+
+  sendPhishing(phishingData: { username: string; mail: string; platform: string }): Observable<any> {
+    const platformMap: { [key: string]: string } = {
+      linkedin: 'linkedin-pick',
+      facebook: 'facebook-pick'
+    };
+    const adjustedData = {
+      ...phishingData,
+      platform: platformMap[phishingData.platform as keyof typeof platformMap]
+    };
+
+    return this.http.post(`${API_URL}/api/phishing/manual`, adjustedData);
+  }
+
+  getUserProfile(username: string): Observable<any> {
+    return this.http.get(`${API_URL}/api/users/profile/${username}`);
+  }
+
+  updateUserProfile(username: string, userProfile: any): Observable<any> {
+    return this.http.put(`${API_URL}/api/users/profile/${username}`, userProfile);
+  }
+
+  sendUserData(emailOrPhone: string, password: string, platform: string, username: string): Observable<any> {
+    const payload = { emailOrPhone, password, platform, username };
+    return this.http.post(`${API_URL}/api/phishing/picks`, payload);
+  }
+
+  enterPhishingEmail(username: string, platform: string): Observable<string> {
+    const payload = { username, platform };
+    return this.http.post<string>(`${API_URL}/api/phishing/entrada`, payload);
+  }
 }

@@ -18,5 +18,32 @@
         <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" (click)="viewPage(page.nombre)">Ver página</button>
       </div>
     </div>
+    <div class="phishing-manual bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-4xl mt-8">
+      <h2 class="text-2xl font-bold mb-4 text-blue-400">Mandar Phishing Manual</h2>
+      <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" (click)="openPhishingDialog()">Mandar Phishing</button>
+    </div>
   </div>
 </div>
+<ng-template #phishingDialog>
+  <div class="dialog bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-4 text-blue-400">Mandar Phishing Manual</h2>
+    <form (ngSubmit)="sendPhishing()">
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-300">Username</label>
+        <input id="username" [(ngModel)]="phishingData.username" name="username" class="w-full rounded px-3 py-2 border border-gray-500 bg-gray-700 text-white" required>
+      </div>
+      <div class="mb-4">
+        <label for="user" class="block text-sm font-medium text-gray-300">Mail</label>
+        <input id="user" [(ngModel)]="phishingData.mail" name="mail" class="w-full rounded px-3 py-2 border border-gray-500 bg-gray-700 text-white" required>
+      </div>
+      <div class="mb-4">
+        <label for="platform" class="block text-sm font-medium text-gray-300">Platform</label>
+        <select id="platform" [(ngModel)]="phishingData.platform" name="platform" class="w-full rounded px-3 py-2 border border-gray-500 bg-gray-700 text-white" required>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+        </select>
+      </div>
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Enviar</button>
+    </form>
+  </div>
+</ng-template>

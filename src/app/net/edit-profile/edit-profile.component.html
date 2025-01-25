@@ -3,32 +3,102 @@
     <h1 class="text-4xl font-extrabold text-blue-400 mb-6">Editar Perfil y Preferencias</h1>
     <form (ngSubmit)="saveProfile()" class="space-y-6 w-full max-w-md">
       <div>
-        <label for="username" class="block text-left text-gray-300">Nombre de Usuario</label>
+        <label for="nombre" class="block text-left text-gray-300">Nombre</label>
         <input
           type="text"
-          id="username"
-          [(ngModel)]="username"
-          name="username"
+          id="nombre"
+          [(ngModel)]="userProfile.nombre"
+          name="nombre"
           class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
         />
       </div>
       <div>
-        <label for="email" class="block text-left text-gray-300">Correo Electrónico</label>
+        <label for="apellido1" class="block text-left text-gray-300">Primer Apellido</label>
         <input
-          type="email"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
+          type="text"
+          id="apellido1"
+          [(ngModel)]="userProfile.apellido1"
+          name="apellido1"
           class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
         />
       </div>
-      <!-- Add more fields for preferences here -->
+      <div>
+        <label for="apellido2" class="block text-left text-gray-300">Segundo Apellido</label>
+        <input
+          type="text"
+          id="apellido2"
+          [(ngModel)]="userProfile.apellido2"
+          name="apellido2"
+          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+        />
+      </div>
+      <div>
+        <label for="mail" class="block text-left text-gray-300">Correo Electrónico</label>
+        <input
+          type="email"
+          id="mail"
+          [(ngModel)]="userProfile.mail"
+          name="mail"
+          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+        />
+      </div>
+      <div>
+        <label for="telefono" class="block text-left text-gray-300">Teléfono</label>
+        <input
+          type="text"
+          id="telefono"
+          [(ngModel)]="userProfile.telefono"
+          name="telefono"
+          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+        />
+      </div>
+      <div>
+        <label for="lNotificable" class="block text-left text-gray-300">¿Seguir recibiendo intentos de phishing?</label>
+        <select
+          id="lNotificable"
+          [(ngModel)]="userProfile.lnotificable"
+          name="lNotificable"
+          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+        >
+          <option [ngValue]="true">Sí</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+      <!--
+      <div>
+        <label for="profileImg" class="block text-left text-gray-300">Imagen de Perfil</label>
+        <input
+          type="text"
+          id="profileImg"
+          [(ngModel)]="userProfile.profileImg"
+          name="profileImg"
+          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+        />
+      </div>
+      <div>
+        <label for="puntos" class="block text-left text-gray-300">Puntos</label>
+        <input
+          type="number"
+          id="puntos"
+          [(ngModel)]="userProfile.puntos"
+          name="puntos"
+          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+        />
+      </div>
+      -->
       <button
         type="submit"
         class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition"
       >
         Guardar Cambios
       </button>
+      <button
+        (click)="goBack()"
+        class="mt-4 w-full bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition"
+      >
+        Volver
+      </button>
     </form>
+
   </div>
 </div>

