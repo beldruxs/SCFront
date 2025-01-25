@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
-import {ApiService} from '../../api.service';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-home-net',
@@ -16,19 +16,23 @@ export class HomeNetComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = sessionStorage.getItem('username');
-    this.loadChart();
     this.getUserProfile();
   }
 
   loadChart(): void {
     const ctx = document.getElementById('phishingChart') as HTMLCanvasElement;
+    const total = this.userProfile.recibido;
+    const enviado = this.userProfile.enviado;
+    const entrado = this.userProfile.entrado;
+    const enEspera = total - (enviado + entrado);
+
     new Chart(ctx, {
-      type: 'bar',
+      type: 'pie',
       data: {
-        labels: ['Phishing Recibido', 'Phishing Entrado', 'Phishing Introducido los Datos'],
+        labels: ['Enviado', 'Entrado', 'En Espera'],
         datasets: [{
           label: 'Estadísticas de Phishing',
-          data: [10, 5, 2], // Fake data
+          data: [enviado, entrado, enEspera],
           backgroundColor: [
             'rgba(75, 192, 192, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -43,9 +47,19 @@ export class HomeNetComponent implements OnInit {
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                return `${label}: ${value}`;
+              }
+            }
           }
         }
       }
@@ -54,9 +68,10 @@ export class HomeNetComponent implements OnInit {
 
   getUserProfile(): void {
     if (this.username) {
-      this.apiService.getUserProfile(this.username).subscribe({
+      this.apiService.getUserProfileData(this.username).subscribe({
         next: (response: any) => {
           this.userProfile = response;
+          this.loadChart();
         },
         error: (error) => {
           console.error('Failed to fetch user profile', error);

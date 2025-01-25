@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../api.service';
-import {NgClass, NgIf} from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -35,14 +35,19 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       mail: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      telefono: ['', Validators.required],
+      telefonoPrefix: ['+34', [Validators.required, Validators.pattern(/^\+\d{1,3}$/)]],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
       frecuencia: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      this.apiService.register(this.registerForm.value).subscribe(
+      const formValue = this.registerForm.value;
+      const fullPhoneNumber = `${formValue.telefonoPrefix}${formValue.telefono}`;
+      const registerData = { ...formValue, telefono: fullPhoneNumber };
+
+      this.apiService.register(registerData).subscribe(
         response => {
           this.notificationMessage = 'User registered successfully!';
           this.isError = false;

@@ -69,14 +69,22 @@
         </div>
       </div>
       <div>
-        <input
-          type="tel"
-          formControlName="telefono"
-          placeholder="Teléfono"
-          class="w-full p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
-        />
-        <div *ngIf="registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched" class="text-red-500">
-          Teléfono es requerido.
+        <div class="flex items-center">
+          <input
+            type="text"
+            formControlName="telefonoPrefix"
+            placeholder="+34"
+            class="w-1/4 p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400 mr-2"
+          />
+          <input
+            type="tel"
+            formControlName="telefono"
+            placeholder="Teléfono"
+            class="w-3/4 p-4 bg-gray-700 rounded-lg text-gray-300 focus:outline-none focus:ring focus:ring-blue-400"
+          />
+        </div>
+        <div *ngIf="registerForm.get('telefono')?.invalid && registerForm.get('telefono')?.touched" class="text-red-500 mt-2">
+          Teléfono es requerido y debe tener 9 dígitos.
         </div>
       </div>
       <div>

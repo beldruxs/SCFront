@@ -81,6 +81,10 @@ export class ApiService {
     return this.http.get(`${API_URL}/api/users/profile/${username}`);
   }
 
+  getUserProfileData(username: string): Observable<any> {
+    return this.http.get(`${API_URL}/api/users/profileData/${username}`);
+  }
+
   updateUserProfile(username: string, userProfile: any): Observable<any> {
     return this.http.put(`${API_URL}/api/users/profile/${username}`, userProfile);
   }

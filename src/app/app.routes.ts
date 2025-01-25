@@ -13,9 +13,13 @@ import {RegisterComponent} from './home/register/register.component';
 import {HomeNetComponent} from './net/home-net/home-net.component';
 import { HomeNetGuard } from './home-net.guard';
 import { EditProfileComponent } from './net/edit-profile/edit-profile.component';
+import { PrivacyPolicyComponent } from './home/privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './home/terms-of-service/terms-of-service.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'terms-of-service', component: TermsOfServiceComponent },
   {
     path: 'admin',
     children: [
