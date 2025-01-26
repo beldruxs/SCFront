@@ -6,6 +6,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {NgIf} from '@angular/common';
 import {FacebookComponent} from './pages/facebook.component';
 import {LinkedinComponent} from './pages/linkedin.component';
+import {NetflixComponent} from './pages/netflix.component';
 
 @Component({
   selector: 'app-login-pages',
@@ -13,7 +14,8 @@ import {LinkedinComponent} from './pages/linkedin.component';
     FormsModule,
     NgIf,
     FacebookComponent,
-    LinkedinComponent
+    LinkedinComponent,
+    NetflixComponent
   ],
   templateUrl: './login-pages.component.html',
   styleUrl: './login-pages.component.css'

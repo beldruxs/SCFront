@@ -5,6 +5,7 @@ import { ApiService } from '../../api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
   activePhishingPages: number = 5; // Example data
   phishingPages: any[] = []; // Initialize as an empty array
 
-  constructor(private dialog: MatDialog, private http: HttpClient, private router: Router, private apiService: ApiService) {}
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username') || 'Guest';
@@ -61,11 +62,21 @@ export class DashboardComponent implements OnInit {
   sendPhishing() {
     this.apiService.sendPhishing(this.phishingData).subscribe({
       next: (response) => {
-        console.log('Phishing enviado exitosamente', response);
-        this.dialog.closeAll();
+        if (response.message === 'Phishing email sent successfully!') {
+          console.log('Phishing enviado exitosamente', response);
+          this.dialog.closeAll();
+          this.snackBar.open('Phishing enviado exitosamente', 'Cerrar', {
+            duration: 3000,
+          });
+        } else {
+          console.error('Error al enviar phishing', response);
+          this.snackBar.open('Error al enviar phishing', 'Cerrar', {
+            duration: 3000,
+          });
+        }
       },
       error: (error) => {
-        console.error('Error al enviar phishing', error);
+        this.dialog.closeAll();
       }
     });
   }

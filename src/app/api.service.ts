@@ -67,7 +67,8 @@ export class ApiService {
   sendPhishing(phishingData: { username: string; mail: string; platform: string }): Observable<any> {
     const platformMap: { [key: string]: string } = {
       linkedin: 'linkedin-pick',
-      facebook: 'facebook-pick'
+      facebook: 'facebook-pick',
+      netflix: 'netflix-pick'
     };
     const adjustedData = {
       ...phishingData,
