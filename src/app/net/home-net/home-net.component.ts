@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { ApiService } from '../../api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-net',
@@ -12,10 +13,13 @@ export class HomeNetComponent implements OnInit {
   username: string | null = '';
   userProfile: any = {};
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(private router: Router, private apiService: ApiService, private titleService: Title) {}
 
   ngOnInit(): void {
     this.username = sessionStorage.getItem('username');
+    if (this.username) {
+      this.titleService.setTitle(`Click Aware | ${this.username}`);
+    }
     this.getUserProfile();
   }
 

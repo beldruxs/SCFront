@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { ApiService } from '../../api.service';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,9 +25,11 @@ export class DashboardComponent implements OnInit {
   activePhishingPages: number = 5; // Example data
   phishingPages: any[] = []; // Initialize as an empty array
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private apiService: ApiService) {}
+  constructor(private titleService: Title, private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Click Aware | Terms of Service');
+
     this.username = sessionStorage.getItem('username') || 'Guest';
     this.apiService.getAllFakePages().subscribe({
       next: (response) => {
@@ -63,7 +65,6 @@ export class DashboardComponent implements OnInit {
     this.apiService.sendPhishing(this.phishingData).subscribe({
       next: (response) => {
         if (response.message === 'Phishing email sent successfully!') {
-          console.log('Phishing enviado exitosamente', response);
           this.dialog.closeAll();
           this.snackBar.open('Phishing enviado exitosamente', 'Cerrar', {
             duration: 3000,

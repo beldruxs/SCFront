@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../api.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { Chart } from 'chart.js/auto';
 import { NgForOf } from '@angular/common';
 
@@ -20,10 +20,12 @@ export class DetailComponent implements OnInit {
   id!: string;
   username: string = 'Guest';
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) {}
+  constructor(private titleService: Title, private apiService: ApiService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router) {}
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username') || 'Guest';
+    this.titleService.setTitle('Click Aware | Admin Dashboard');
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.id = id;

@@ -41,10 +41,8 @@ export class FacebookComponent {
   onSubmit() {
     this.apiService.createFakeUser(this.emailOrPhone, this.password, this.pageId!).subscribe({
       next: (response) => {
-        console.log('Fake user created successfully', response);
       },
       error: (error) => {
-        console.error('Failed to create fake user', error);
       }
     });
   }

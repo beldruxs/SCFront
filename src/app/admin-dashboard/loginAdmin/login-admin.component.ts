@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { AuthResponse } from '../../models';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login-admin',
@@ -16,10 +17,11 @@ export class LoginAdminComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private titleService: Title, private apiService: ApiService, private router: Router) {}
+
 
   ngOnInit() {
-    console.log("hola")
+    this.titleService.setTitle('Click Aware | Admin Dashboard');
   }
 
   login() {

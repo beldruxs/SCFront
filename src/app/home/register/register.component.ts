@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { NgClass, NgIf } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -24,10 +25,12 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Click Aware | Registro');
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido1: ['', Validators.required],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-profile',
@@ -26,10 +27,13 @@ export class EditProfileComponent implements OnInit {
     lnotificable: false
   };
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private titleService: Title) {}
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username') || '';
+    if (this.username) {
+      this.titleService.setTitle(`Click Aware | ${this.username}`);
+    }
     this.apiService.getUserProfile(this.username).subscribe({
       next: (response) => {
         this.userProfile = response;
@@ -45,10 +49,8 @@ export class EditProfileComponent implements OnInit {
   saveProfile() {
     this.apiService.updateUserProfile(this.username, this.userProfile).subscribe({
       next: () => {
-        console.log('Profile updated successfully');
       },
       error: (error) => {
-        console.error('Failed to update profile', error);
       }
     });
   }
