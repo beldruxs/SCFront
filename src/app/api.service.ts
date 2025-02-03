@@ -99,4 +99,8 @@ export class ApiService {
     const payload = { username, platform };
     return this.http.post<string>(`${API_URL}/api/phishing/entrada`, payload);
   }
+
+  submitContactForm(formData: any): Observable<any> {
+    return this.http.post(`${API_URL}/api/contact/submit`, formData);
+  }
 }
