@@ -1,59 +1,58 @@
-# Phishing
+# 📌 Estructura del Proyecto
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+Este proyecto sigue un flujo de datos basado en la arquitectura clásica:
 
-## Development server
+📌 **Base de Datos** → **Backend** → **Frontend**
 
-To start a local development server, run:
+Cada capa cumple una función específica en la gestión y presentación de la información.
 
-```bash
-ng serve
-```
+## 🖥️ Backend (Spring Boot)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+El backend está organizado en diferentes capas, cada una con una responsabilidad clara:
 
-## Code scaffolding
+- **Controllers** 🎯 → Son los endpoints que reciben las peticiones del frontend.
+- **Services** ⚙️ → Contienen la lógica de negocio y orquestan las operaciones.
+- **Repositories** 🗄️ → Se encargan de las consultas SQL a la base de datos.
+- **Models** 📄 → Representan las entidades o tablas creadas en la base de datos.
+- **DTOs** 📦 → Se utilizan para transferir datos entre backend y frontend.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🎨 Frontend (Angular + Tailwind)
 
-```bash
-ng generate component component-name
-```
+El frontend está estructurado en varias secciones según su funcionalidad:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+📂 **admin-dashboard/** → Panel de administración para gestionar la plataforma.  
+📂 **home/** → Página principal accesible para usuarios no logueados.  
+📂 **net/** → Sección exclusiva para usuarios autenticados.  
+📂 **login-pages/** → Páginas de phishing utilizadas en el proyecto de concienciación.  
+📂 **components/** → Componentes comunes reutilizables en todo el frontend.
 
-```bash
-ng generate --help
-```
+📕 **api.service.ts** → Archivo que gestiona las peticiones HTTP entre el frontend y el backend.
 
-## Building
+## 🗄️ Base de Datos (MySQL)
 
-To build the project run:
+Las principales tablas del sistema son:
 
-```bash
-ng build
-```
+- 📊 **Users** → Guarda la información de los usuarios registrados.
+- 📊 **Roles** → Contiene los roles de los usuarios (actualmente solo "user" y "admin").
+- 📊 **User_Roles** → Relaciona los usuarios con sus roles.
+- 📊 **FakeAttempts** → Almacena los intentos de phishing enviados a los usuarios.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 🔄 **Flujo de datos habitual**
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1️⃣ **Registro y envío de phishing:**
+- Cuando un usuario se registra, recibe un correo de confirmación.
+- Tras confirmar, se le enviará un intento de phishing cada **6 días**.
+- Se dejarán de enviar intentos si el usuario tiene más de **20 puntos** o si desactiva la opción en su perfil.
 
-```bash
-ng test
-```
+2️⃣ **Selección del intento de phishing:**
+- Se elige **aleatoriamente** entre las plantillas de la base de datos cuyo código termine en `-pick`.
 
-## Running end-to-end tests
+3️⃣ **Penalización por caer en phishing:**
+- Si el usuario **abre el intento de phishing**, se le **restan 2 puntos**.
+- Si además **introduce datos en la página falsa**, se le **restan 5 puntos** en total.
 
-For end-to-end (e2e) testing, run:
+4️⃣ **Recompensa por no caer en phishing:**
+- Si el usuario **no abre el correo en 2 días**, se le **suman 2 puntos**.
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
