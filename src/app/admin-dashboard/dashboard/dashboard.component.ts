@@ -6,20 +6,22 @@ import { MatDialog } from '@angular/material/dialog';
 import {FormsModule} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import {SpinnerComponent} from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   imports: [
     NgForOf,
-    FormsModule
+    FormsModule,
+    SpinnerComponent
   ],
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('phishingDialog') phishingDialog!: TemplateRef<any>;
   phishingData = { username: '', mail: '', platform: 'linkedin' };
-
+  isLoading: boolean = false;
   username: string = '';
   totalUsers: number = 100; // Example data
   activePhishingPages: number = 5; // Example data
@@ -31,12 +33,16 @@ export class DashboardComponent implements OnInit {
     this.titleService.setTitle('Click Aware | Terms of Service');
 
     this.username = sessionStorage.getItem('username') || 'Guest';
+    this.isLoading = true;
     this.apiService.getAllFakePages().subscribe({
       next: (response) => {
         this.phishingPages = response;
+        this.isLoading = false;
+
       },
       error: (error) => {
         console.error('Failed to fetch fake pages', error);
+        this.isLoading = false;
       }
     });
   }

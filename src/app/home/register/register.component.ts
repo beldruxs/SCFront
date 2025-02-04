@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { NgClass, NgIf } from '@angular/common';
 import { Title } from '@angular/platform-browser';
+import {SpinnerComponent} from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ import { Title } from '@angular/platform-browser';
     RouterLink,
     ReactiveFormsModule,
     NgIf,
-    NgClass
+    NgClass,
+    SpinnerComponent
   ],
   styleUrls: ['./register.component.css']
 })
@@ -20,6 +22,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   notificationMessage: string | null = null;
   isError: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +49,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
+      this.isLoading = true;
       const formValue = this.registerForm.value;
       const fullPhoneNumber = `${formValue.telefonoPrefix}${formValue.telefono}`;
       const registerData = { ...formValue, telefono: fullPhoneNumber };
@@ -54,6 +58,7 @@ export class RegisterComponent implements OnInit {
         response => {
           this.notificationMessage = 'User registered successfully!';
           this.isError = false;
+          this.isLoading = false;
           this.cdr.detectChanges();
           setTimeout(() => {
             this.router.navigate(['/login']);
@@ -63,6 +68,7 @@ export class RegisterComponent implements OnInit {
           this.notificationMessage = error.error || 'Error registering user';
           this.isError = true;
           this.cdr.detectChanges();
+          this.isLoading = false;
         }
       );
     }
