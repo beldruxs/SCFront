@@ -4,12 +4,14 @@ import { AuthResponse } from '../../models';
 import { ApiService } from '../../api.service';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import {SpinnerComponent} from '../../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   imports: [
     RouterLink,
-    FormsModule
+    FormsModule,
+    SpinnerComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -18,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router, private titleService: Title) {}
 
@@ -26,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.isLoading = true;
     this.apiService.login(this.username, this.password)
       .subscribe({
         next: (response: AuthResponse) => {
@@ -33,9 +37,11 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('tokenType', response.tokenType);
           sessionStorage.setItem('username', response.username.toString());
           this.router.navigate(['/net']);
+          this.isLoading = false;
         },
         error: (error) => {
           alert('Invalid credentials');
+          this.isLoading = false;
         }
       });
   }
